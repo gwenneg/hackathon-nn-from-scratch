@@ -1,0 +1,8 @@
+= Build an artificial neural network from scratch
+
+== Maven Wrapper
+
+This repository depends on link:https://maven.apache.org/wrapper/[Apache Maven Wrapper].
+
+You don't need to install Maven before building the Java apps.
+Simply run `./mvnw clean install` and the wrapper will download Maven, if needed, then build the projects.
