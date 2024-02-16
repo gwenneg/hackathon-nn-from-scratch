@@ -31,6 +31,17 @@ public class GameEngine {
         return checkWinner(x, y);
     }
 
+    public int[] getState() {
+        int[] state = new int[9];
+        int i = 0;
+        for (int j = 0; j < grid.length; j++) {
+            for (int k = 0; k < grid[0].length; k++) {
+                state[i++] = grid[j][k];
+            }
+        }
+        return state;
+    }
+
     private boolean isValidMove(int x, int y, int player) {
         return x >= 0 && x < 3 && y >= 0 && y < 3 && grid[x][y] == EMPTY && player == PLAYER1 || player == PLAYER2;
     }
