@@ -58,11 +58,6 @@ public class Layer {
             }
             return next.forward(inputs);
         } else {
-
-            System.out.println("DEBUG");
-            System.out.println("weight[" + weights.length + "][" + weights[0].length + "]");
-            System.out.println("inputs[" + inputs.length + "]");
-
             // TODO: Replace with pure Java, but keep this for faster processing.
             try (INDArray weightsMatrix = Nd4j.create(weights); INDArray inputsMatrix = Nd4j.create(inputs)) {
                 double[] matricesDotProductResult = weightsMatrix.mmul(inputsMatrix).toDoubleVector();
