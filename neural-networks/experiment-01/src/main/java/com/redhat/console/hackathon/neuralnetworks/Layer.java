@@ -41,7 +41,7 @@ public class Layer {
     public Layer(Layer previous, int size, ActivationType activationType) {
 
         this.previous = previous;
-           this.size = size;
+        this.size = size;
         this.activationType = activationType;
 
         // The input layer has no weights or biases.

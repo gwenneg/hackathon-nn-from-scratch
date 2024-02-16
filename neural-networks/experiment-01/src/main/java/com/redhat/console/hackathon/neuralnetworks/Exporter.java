@@ -14,11 +14,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT;
+
 public class Exporter {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd_hhmmss");
     private static final String DEFAULT_RESOURCE_NAME = "neural-network.json";
+
+    static {
+        OBJECT_MAPPER.enable(INDENT_OUTPUT);
+    }
 
     public static void saveToFile(NeuralNetwork network) {
         saveToFile(network, null);
