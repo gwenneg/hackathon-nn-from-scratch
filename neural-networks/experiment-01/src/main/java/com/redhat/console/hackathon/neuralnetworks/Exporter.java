@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class Exporter {
 
@@ -49,12 +50,16 @@ public class Exporter {
             throw new UncheckedIOException(e);
         }
 
-        for (Layer layer : network.getLayers()) {
-            if (layer.getPreviousId() != null && layer.getPrevious() == null) {
-                layer.setPrevious(network.getLayers().get(layer.getPreviousId()));
-            }
-            if (layer.getNextId() != null && layer.getNext() == null) {
-                layer.setNext(network.getLayers().get(layer.getNextId()));
+        List<Layer> layers = network.getLayers();
+        for (int i = 0; i < layers.size(); i++) {
+            if (i > 0) {
+                Layer previous = layers.get(i - 1);
+                Layer current = layers.get(i);
+                current.setPrevious(previous);
+                if (i < layers.size() - 1) {
+                    Layer next = layers.get(i + 1);
+                    current.setNext(next);
+                }
             }
         }
 

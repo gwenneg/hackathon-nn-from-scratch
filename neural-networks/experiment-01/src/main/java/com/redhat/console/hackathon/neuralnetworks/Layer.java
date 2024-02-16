@@ -2,6 +2,7 @@ package com.redhat.console.hackathon.neuralnetworks;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
@@ -9,14 +10,15 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+
+// Fields are exported regardless of their visibility.
+@JsonAutoDetect(fieldVisibility = ANY)
+@JsonInclude(NON_NULL)
 public class Layer {
 
-    // Required for (de)serialization purposes.
-    private final int id;
     // Integer is preferred over int here because it can be null.
-    private Integer previousId;
-    private Integer nextId;
     private final int size;
     private final ActivationType activationType;
     private final double[][] weights;
@@ -29,22 +31,17 @@ public class Layer {
 
     // Needed for deserialization with Jackson.
     public Layer() {
-        id = -1;
         previous = null;
-        size = 0;
+        size = -1;
         activationType = null;
         weights = null;
         biases = null;
     }
 
-    public Layer(int id, Layer previous, int size, ActivationType activationType) {
+    public Layer(Layer previous, int size, ActivationType activationType) {
 
-        this.id = id;
         this.previous = previous;
-        if (previous != null) {
-            this.previousId = previous.getId();
-        }
-        this.size = size;
+           this.size = size;
         this.activationType = activationType;
 
         // The input layer has no weights or biases.
@@ -59,16 +56,15 @@ public class Layer {
         }
     }
 
-    public int getId() {
-        return id;
-    }
-
     public int getSize() {
         return size;
     }
 
+    public void setPrevious(Layer previous) {
+        this.previous = previous;
+    }
+
     public void setNext(Layer next) {
-        this.nextId = next.getId();
         this.next = next;
     }
 
@@ -107,22 +103,6 @@ public class Layer {
         }
     }
 
-    public Layer getPrevious() {
-        return previous;
-    }
-
-    public Integer getPreviousId() {
-        return previousId;
-    }
-
-    public Integer getNextId() {
-        return nextId;
-    }
-
-    public Layer getNext() {
-        return next;
-    }
-
     private void initWeightsAndBiases() {
         double weightBoundary = Math.sqrt(6) / Math.sqrt(size + previous.getSize());
         Random random = new SecureRandom();
@@ -136,9 +116,5 @@ public class Layer {
         }
         System.out.println("weights=" + Arrays.deepToString(weights));
         System.out.println("biases=" + Arrays.toString(biases));
-    }
-
-    public void setPrevious(Layer previous) {
-        this.previous = previous;
     }
 }
