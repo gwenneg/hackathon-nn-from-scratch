@@ -12,7 +12,15 @@ public class GameEngine {
 
     private final int[][] grid = new int[3][3];
 
-    public void mark(int x, int y, int player) {
+    public void reset() {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                grid[i][j] = EMPTY;
+            }
+        }
+    }
+
+    public Optional<Integer> mark(int x, int y, int player) {
 
         if (!isValidMove(x, y, player)) {
             throw new IllegalStateException("Forbidden move");
@@ -20,10 +28,7 @@ public class GameEngine {
 
         grid[x][y] = player;
 
-        Optional<Integer> winner = checkWinner(x, y);
-
-        // winner has won!
-
+        return checkWinner(x, y);
     }
 
     private boolean isValidMove(int x, int y, int player) {
