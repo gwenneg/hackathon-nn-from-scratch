@@ -18,12 +18,11 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonInclude(NON_NULL)
 public class Layer {
 
+    private final int size;
     private final ActivationType activationType;
     private final double[][] weights;
     private final double[] biases;
 
-    @JsonIgnore
-    private final int size;
     @JsonIgnore
     private Layer previous;
     @JsonIgnore
@@ -31,10 +30,10 @@ public class Layer {
 
     // Needed for deserialization with Jackson.
     public Layer() {
+        size = -1;
         activationType = null;
         weights = null;
         biases = null;
-        size = -1;
     }
 
     public Layer(Layer previous, int size, ActivationType activationType) {
