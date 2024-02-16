@@ -12,9 +12,8 @@ import java.util.Random;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Layer {
 
+    // Required for (de)serialization purposes.
     private final int id;
-    @JsonIgnore
-    private Layer previous;
     // Integer is preferred over int here because it can be null.
     private Integer previousId;
     private Integer nextId;
@@ -23,6 +22,8 @@ public class Layer {
     private final double[][] weights;
     private final double[] biases;
 
+    @JsonIgnore
+    private Layer previous;
     @JsonIgnore
     private Layer next;
 

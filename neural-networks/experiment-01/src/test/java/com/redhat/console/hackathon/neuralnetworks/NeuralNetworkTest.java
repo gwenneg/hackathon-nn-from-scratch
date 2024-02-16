@@ -1,10 +1,7 @@
 package com.redhat.console.hackathon.neuralnetworks;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,7 +41,7 @@ public class NeuralNetworkTest {
     }
 
     @Test
-    void test() throws IOException {
+    void test() {
 
         NeuralNetwork network = new NeuralNetwork();
         network.init(3, 28, 2, 4, 12, 2);
@@ -61,17 +58,17 @@ public class NeuralNetworkTest {
         System.out.println("outputs=" + Arrays.toString(outputs));
         assertEquals(2, outputs.length);
 
-        network.exportNetwork();
+        Exporter.saveToFile(network);
 
     }
 
     @Test
-    void testSerDes() throws IOException, URISyntaxException {
+    void testSerDes() {
 
         NeuralNetwork network = new NeuralNetwork();
         System.out.println(network.getLayers().size());
-        network.importNetwork();
-        System.out.println(network.getLayers().size());
-        network.exportNetwork();
+        NeuralNetwork network2 = Exporter.loadFromFile();
+        System.out.println(network2.getLayers().size());
+        Exporter.saveToFile(network2);
     }
 }
