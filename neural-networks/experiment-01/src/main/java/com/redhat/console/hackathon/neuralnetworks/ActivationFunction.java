@@ -1,20 +1,23 @@
 package com.redhat.console.hackathon.neuralnetworks;
 
-public class ActivationFunction {
+import java.util.function.Function;
 
-    public static double relu(double value) {
-        return Math.max(0, value);
+// https://spotintelligence.com/2023/06/16/activation-function/
+public enum ActivationFunction {
+
+    LEAKY_RELU(value -> Math.max(0.1 * value, value)),
+
+    RELU(value -> Math.max(0, value)),
+
+    SIGMOID(value -> 1 / (1 + Math.exp(-value)));
+
+    private final Function<Double, Double> function;
+
+    ActivationFunction(Function<Double, Double> function) {
+        this.function = function;
     }
 
-    public static double leakyRelu(double value) {
-        return Math.max(0.1 * value, value);
-    }
-
-    public static double sigmoid(double value) {
-        return 1 / (1 + Math.exp(-value));
-    }
-
-    public static double softmax(double value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public Double apply(Double value) {
+        return function.apply(value);
     }
 }

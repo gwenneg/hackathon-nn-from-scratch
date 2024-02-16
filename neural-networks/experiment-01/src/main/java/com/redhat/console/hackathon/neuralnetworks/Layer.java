@@ -13,13 +13,14 @@ import java.util.Random;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
-// Fields are exported regardless of their visibility.
+// Fields are serialized regardless of their visibility.
 @JsonAutoDetect(fieldVisibility = ANY)
+// Null fields are not serialized.
 @JsonInclude(NON_NULL)
 public class Layer {
 
     private final int size;
-    private final ActivationType activationType;
+    private final ActivationFunction activationFunction;
     private final double[][] weights;
     private final double[] biases;
 
@@ -31,16 +32,16 @@ public class Layer {
     // Needed for deserialization with Jackson.
     public Layer() {
         size = -1;
-        activationType = null;
+        activationFunction = null;
         weights = null;
         biases = null;
     }
 
-    public Layer(Layer previous, int size, ActivationType activationType) {
+    public Layer(Layer previous, int size, ActivationFunction activationFunction) {
 
         this.previous = previous;
         this.size = size;
-        this.activationType = activationType;
+        this.activationFunction = activationFunction;
 
         // The input layer has no weights or biases.
         if (previous != null) {
@@ -87,10 +88,7 @@ public class Layer {
                 double[] matricesDotProductResult = weightsMatrix.mmul(inputsMatrix).toDoubleVector();
                 for (int i = 0; i < matricesDotProductResult.length; i++) {
                     double value = matricesDotProductResult[i] + biases[i];
-                    switch (activationType) {
-                        case RELU -> matricesDotProductResult[i] = ActivationFunction.relu(value);
-                        case SIGMOID -> matricesDotProductResult[i] = ActivationFunction.sigmoid(value);
-                    }
+                    matricesDotProductResult[i] = activationFunction.apply(value);
                 }
                 if (next == null) {
                     return matricesDotProductResult;

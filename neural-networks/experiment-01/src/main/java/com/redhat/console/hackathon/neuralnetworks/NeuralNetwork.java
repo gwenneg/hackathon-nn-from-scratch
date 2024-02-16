@@ -21,10 +21,10 @@ public class NeuralNetwork {
                 Layer inputLayer = new Layer(null, layersSize[i], null);
                 layers.add(inputLayer);
             } else if (i < layersSize.length - 1) {
-                Layer hiddenLayer = new Layer(layers.get(i - 1), layersSize[i], ActivationType.RELU);
+                Layer hiddenLayer = new Layer(layers.get(i - 1), layersSize[i], ActivationFunction.RELU);
                 layers.add(hiddenLayer);
             } else {
-                Layer outputLayer = new Layer(layers.get(i - 1), layersSize[i], ActivationType.SIGMOID);
+                Layer outputLayer = new Layer(layers.get(i - 1), layersSize[i], ActivationFunction.SIGMOID);
                 layers.add(outputLayer);
             }
         }
