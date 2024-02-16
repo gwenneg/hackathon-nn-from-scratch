@@ -1,5 +1,7 @@
 package com.redhat.console.hackathon.neuralnetworks;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
@@ -7,19 +9,40 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Layer {
 
-    private final Layer previous;
+    private final int id;
+    @JsonIgnore
+    private Layer previous;
+    // Integer is preferred over int here because it can be null.
+    private Integer previousId;
+    private Integer nextId;
     private final int size;
     private final ActivationType activationType;
     private final double[][] weights;
     private final double[] biases;
 
+    @JsonIgnore
     private Layer next;
 
-    public Layer(Layer previous, int size, ActivationType activationType) {
+    // Needed for deserialization with Jackson.
+    public Layer() {
+        id = -1;
+        previous = null;
+        size = 0;
+        activationType = null;
+        weights = null;
+        biases = null;
+    }
 
+    public Layer(int id, Layer previous, int size, ActivationType activationType) {
+
+        this.id = id;
         this.previous = previous;
+        if (previous != null) {
+            this.previousId = previous.getId();
+        }
         this.size = size;
         this.activationType = activationType;
 
@@ -35,11 +58,16 @@ public class Layer {
         }
     }
 
+    public int getId() {
+        return id;
+    }
+
     public int getSize() {
         return size;
     }
 
     public void setNext(Layer next) {
+        this.nextId = next.getId();
         this.next = next;
     }
 
@@ -58,7 +86,8 @@ public class Layer {
             }
             return next.forward(inputs);
         } else {
-            // TODO: Replace with pure Java, but keep this for faster processing.
+            // TODO: Replace with pure Java, but keep this for faster processing?
+            // Watch https://www.youtube.com/watch?v=aircAruvnKk&t=821s to understand why we're using matrices multiplication here.
             try (INDArray weightsMatrix = Nd4j.create(weights); INDArray inputsMatrix = Nd4j.create(inputs)) {
                 double[] matricesDotProductResult = weightsMatrix.mmul(inputsMatrix).toDoubleVector();
                 for (int i = 0; i < matricesDotProductResult.length; i++) {
@@ -77,6 +106,22 @@ public class Layer {
         }
     }
 
+    public Layer getPrevious() {
+        return previous;
+    }
+
+    public Integer getPreviousId() {
+        return previousId;
+    }
+
+    public Integer getNextId() {
+        return nextId;
+    }
+
+    public Layer getNext() {
+        return next;
+    }
+
     private void initWeightsAndBiases() {
         double weightBoundary = Math.sqrt(6) / Math.sqrt(size + previous.getSize());
         Random random = new SecureRandom();
@@ -90,5 +135,9 @@ public class Layer {
         }
         System.out.println("weights=" + Arrays.deepToString(weights));
         System.out.println("biases=" + Arrays.toString(biases));
+    }
+
+    public void setPrevious(Layer previous) {
+        this.previous = previous;
     }
 }
