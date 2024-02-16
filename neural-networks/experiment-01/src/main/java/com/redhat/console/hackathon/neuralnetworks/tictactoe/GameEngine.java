@@ -31,8 +31,8 @@ public class GameEngine {
         return checkWinner(x, y);
     }
 
-    public int[] getState() {
-        int[] state = new int[9];
+    public double[] getState() {
+        double[] state = new double[9];
         int i = 0;
         for (int j = 0; j < grid.length; j++) {
             for (int k = 0; k < grid[0].length; k++) {
