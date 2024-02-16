@@ -5,11 +5,11 @@ import java.util.function.Function;
 // https://spotintelligence.com/2023/06/16/activation-function/
 public enum ActivationFunction {
 
-    LEAKY_RELU(value -> Math.max(0.1 * value, value)),
+    LEAKY_RELU(x -> Math.max(0.01 * x, x)),
 
-    RELU(value -> Math.max(0, value)),
+    RELU(x -> Math.max(0, x)),
 
-    SIGMOID(value -> 1 / (1 + Math.exp(-value)));
+    SIGMOID(x -> 1 / (1 + Math.exp(-x)));
 
     private final Function<Double, Double> function;
 
