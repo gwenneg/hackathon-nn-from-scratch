@@ -8,18 +8,17 @@
 }
 .grid > div {
     background-color: #ccc;
-    position: relative;
 }
 .grid > div:hover {
     background-color: #eee;
     cursor: pointer;
-}
-.marked:hover {
-    cursor: not-allowed !important;
 }
 .cross {
     background-image: url("../images/cross.svg");
 }
 .circle {
     background-image: url("../images/circle.svg");
+}
+.disabled {
+    cursor: not-allowed !important;
 }

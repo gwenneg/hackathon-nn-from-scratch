@@ -4,15 +4,22 @@ import java.util.Optional;
 
 public class MarkResponse {
 
-    private int winner;
+    private String mark;
 
-    public MarkResponse(Optional<Integer> winner) {
+    private Integer winner;
+
+    public MarkResponse(String mark, Optional<Integer> winner) {
+        this.mark = mark;
         if (winner.isPresent()) {
             this.winner = winner.get();
         }
     }
 
-    public int getWinner() {
+    public String getMark() {
+        return mark;
+    }
+
+    public Integer getWinner() {
         return winner;
     }
 }

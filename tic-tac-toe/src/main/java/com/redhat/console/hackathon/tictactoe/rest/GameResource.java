@@ -24,6 +24,7 @@ public class GameResource {
     @Path("/mark")
     public MarkResponse mark(MarkRequest request) {
         Optional<Integer> winner = engine.mark(request.getX(), request.getY(), request.getPlayer());
-        return new MarkResponse(winner);
+        // FIXME Return correct mark!
+        return new MarkResponse("cross", winner);
     }
 }
