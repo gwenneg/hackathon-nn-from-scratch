@@ -17,11 +17,9 @@
 .marked:hover {
     cursor: not-allowed !important;
 }
-svg {
-    position: absolute;
-    top: 25px;
-    left: 25px;
+.cross {
+    background-image: url("../images/cross.svg");
 }
-.hidden {
-    display: none;
+.circle {
+    background-image: url("../images/circle.svg");
 }
