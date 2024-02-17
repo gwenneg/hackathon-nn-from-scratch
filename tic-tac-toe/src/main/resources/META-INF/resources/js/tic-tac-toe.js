@@ -25,6 +25,10 @@ async function reset() {
     const response = await fetch("/game/reset", {
         method: "PUT"
     });
+    const squares = document.querySelectorAll(".grid > div");
+    squares.forEach(square => {
+       square.classList.remove("disabled", "cross", "circle");
+    });
 }
 
 onDocumentReady(() => {
@@ -43,6 +47,10 @@ onDocumentReady(() => {
                 });
             }
         });
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+       reset();
     });
 
 });

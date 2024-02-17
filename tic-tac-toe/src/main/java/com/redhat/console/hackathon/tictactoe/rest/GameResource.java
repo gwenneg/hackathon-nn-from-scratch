@@ -1,12 +1,11 @@
 package com.redhat.console.hackathon.tictactoe.rest;
 
 import com.redhat.console.hackathon.tictactoe.GameEngine;
+import com.redhat.console.hackathon.tictactoe.MarkResult;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
-
-import java.util.Optional;
 
 @Path("/game")
 public class GameResource {
@@ -23,8 +22,7 @@ public class GameResource {
     @POST
     @Path("/mark")
     public MarkResponse mark(MarkRequest request) {
-        Optional<Integer> winner = engine.mark(request.getX(), request.getY(), request.getPlayer());
-        // FIXME Return correct mark!
-        return new MarkResponse("cross", winner);
+        MarkResult result = engine.mark(request.getX(), request.getY());
+        return new MarkResponse(result.getMark(), result.getWinner());
     }
 }

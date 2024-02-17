@@ -13,17 +13,11 @@ public class MarkRequest {
     @Max(2)
     private int y;
 
-    private int player;
-
     public int getX() {
         return x;
     }
 
     public int getY() {
         return y;
-    }
-
-    public int getPlayer() {
-        return player;
     }
 }

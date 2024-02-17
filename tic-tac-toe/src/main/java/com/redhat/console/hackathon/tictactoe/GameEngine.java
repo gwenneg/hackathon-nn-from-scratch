@@ -4,14 +4,13 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.Optional;
 
+import static com.redhat.console.hackathon.tictactoe.Player.PLAYER_1;
+import static com.redhat.console.hackathon.tictactoe.Player.PLAYER_2;
+
 @ApplicationScoped
 public class GameEngine {
 
     private static final int EMPTY = 0;
-
-    // Will a negative value work well with ReLu? To be confirmed...
-    private static final int PLAYER1 = -1;
-    private static final int PLAYER2 = 1;
 
     private final int[][] grid = new int[3][3];
 
@@ -23,15 +22,27 @@ public class GameEngine {
         }
     }
 
-    public Optional<Integer> mark(int x, int y, int player) {
+    private Player currentPlayer;
 
-        if (!isValidMove(x, y, player)) {
+    private void updateCurrentPlayer() {
+        if (currentPlayer == null || currentPlayer == PLAYER_2) {
+            currentPlayer = PLAYER_1;
+        } else {
+            currentPlayer = PLAYER_2;
+        }
+    }
+
+    public MarkResult mark(int x, int y) {
+
+        updateCurrentPlayer();
+
+        if (!isValidMove(x, y)) {
             throw new IllegalStateException("Forbidden move");
         }
 
-        grid[x][y] = player;
+        grid[x][y] = currentPlayer.getValue();
 
-        return checkWinner(x, y);
+        return new MarkResult(currentPlayer.getMark(), checkWinner(x, y));
     }
 
     public double[] getState() {
@@ -45,8 +56,8 @@ public class GameEngine {
         return state;
     }
 
-    private boolean isValidMove(int x, int y, int player) {
-        return x >= 0 && x < 3 && y >= 0 && y < 3 && grid[x][y] == EMPTY && player == PLAYER1 || player == PLAYER2;
+    private boolean isValidMove(int x, int y) {
+        return x >= 0 && x < 3 && y >= 0 && y < 3 && grid[x][y] == EMPTY;
     }
 
     private Optional<Integer> checkWinner(int x, int y) {
