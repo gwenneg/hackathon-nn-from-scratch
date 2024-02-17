@@ -1,7 +1,10 @@
-package com.redhat.console.hackathon.neuralnetworks.tictactoe;
+package com.redhat.console.hackathon.tictactoe;
+
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.Optional;
 
+@ApplicationScoped
 public class GameEngine {
 
     private static final int EMPTY = 0;

@@ -11,6 +11,7 @@
 
     <modules>
         <module>neural-networks/experiment-01</module>
+        <module>tic-tac-toe</module>
     </modules>
 
     <properties>

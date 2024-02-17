@@ -6,3 +6,8 @@ This repository depends on link:https://maven.apache.org/wrapper/[Apache Maven W
 
 You don't need to install Maven before building the Java apps.
 Simply run `./mvnw clean install` and the wrapper will download Maven, if needed, then build the projects.
+
+== How to start the game
+
+1. Run `./mvnw clean quarkus:dev -pl :tic-tac-toe`
+2. Open http://localhost:8080/
