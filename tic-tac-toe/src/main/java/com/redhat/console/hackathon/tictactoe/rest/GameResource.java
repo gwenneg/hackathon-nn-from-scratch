@@ -3,9 +3,9 @@ package com.redhat.console.hackathon.tictactoe.rest;
 import com.redhat.console.hackathon.tictactoe.GameEngine;
 import com.redhat.console.hackathon.tictactoe.MarkResult;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
+import jakarta.ws.rs.*;
+
+import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/game")
 public class GameResource {
@@ -21,8 +21,10 @@ public class GameResource {
 
     @POST
     @Path("/mark")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
     public MarkResponse mark(MarkRequest request) {
-        MarkResult result = engine.mark(request.getX(), request.getY());
+        MarkResult result = engine.mark(request.x, request.y);
         return new MarkResponse(result.getMark(), result.getWinner());
     }
 }

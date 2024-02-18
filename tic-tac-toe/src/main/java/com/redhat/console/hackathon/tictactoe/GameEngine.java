@@ -60,22 +60,22 @@ public class GameEngine {
         return x >= 0 && x < 3 && y >= 0 && y < 3 && grid[x][y] == EMPTY;
     }
 
-    private Optional<Integer> checkWinner(int x, int y) {
+    private Optional<Player> checkWinner(int x, int y) {
 
         if (grid[x][0] != EMPTY && grid[x][0] == grid[x][1] && grid[x][1] == grid[x][2]) {
-            return Optional.of(grid[x][0]);
+            return Optional.of(Player.fromValue(grid[x][0]));
         }
 
         if (grid[0][y] != EMPTY && grid[0][y] == grid[1][y] && grid[1][y] == grid[2][y]) {
-            return Optional.of(grid[0][y]);
+            return Optional.of(Player.fromValue(grid[0][y]));
         }
 
         if (grid[0][0] != EMPTY && grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2]) {
-            return Optional.of(grid[0][0]);
+            return Optional.of(Player.fromValue(grid[0][0]));
         }
 
         if (grid[0][2] != EMPTY && grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0]) {
-            return Optional.of(grid[0][2]);
+            return Optional.of(Player.fromValue(grid[0][2]));
         }
 
         return Optional.empty();

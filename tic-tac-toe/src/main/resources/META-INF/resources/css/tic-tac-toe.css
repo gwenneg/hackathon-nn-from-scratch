@@ -14,10 +14,6 @@ header {
     font-size: 75px;
     color: #ccc;
 }
-footer {
-    margin-top: 20px;
-    text-align: center;
-}
 .grid {
     width: 600px;
     height: 600px;
@@ -40,6 +36,10 @@ footer {
 }
 .circle {
     background: url("../images/circle.svg") center no-repeat;
+}
+footer {
+    margin-top: 20px;
+    text-align: center;
 }
 #reset {
     border: 0;

@@ -21,4 +21,13 @@ public enum Player {
     public String getMark() {
         return mark;
     }
+
+    public static Player fromValue(int value) {
+        for (Player player : Player.values()) {
+            if (player.value == value) {
+                return player;
+            }
+        }
+        throw new IllegalArgumentException("Unknown " + Player.class.getSimpleName() + " value: " + value);
+    }
 }

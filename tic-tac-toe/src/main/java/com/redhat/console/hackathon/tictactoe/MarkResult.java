@@ -5,9 +5,9 @@ import java.util.Optional;
 public class MarkResult {
 
     private final String mark;
-    private final Optional<Integer> winner;
+    private final Optional<Player> winner;
 
-    public MarkResult(String mark, Optional<Integer> winner) {
+    public MarkResult(String mark, Optional<Player> winner) {
         this.mark = mark;
         this.winner = winner;
     }
@@ -16,7 +16,7 @@ public class MarkResult {
         return mark;
     }
 
-    public Optional<Integer> getWinner() {
+    public Optional<Player> getWinner() {
         return winner;
     }
 }
