@@ -14,9 +14,17 @@ header {
     font-size: 75px;
     color: #ccc;
 }
+#game {
+    display: inline-flex;
+}
+.player {
+    font-family: MilkMango, serif;
+    color: #ccc;
+}
 .grid {
     width: 600px;
     height: 600px;
+    margin: 0 30px;
     display: grid;
     gap: 15px;
     grid-template-columns: repeat(3, 1fr);
@@ -41,8 +49,9 @@ footer {
     margin-top: 20px;
     text-align: center;
 }
-#reset {
+#start, #stop {
     border: 0;
+    margin: 0 20px;
     padding: 10px 20px;
     font-family: MilkMango, serif;
 }
