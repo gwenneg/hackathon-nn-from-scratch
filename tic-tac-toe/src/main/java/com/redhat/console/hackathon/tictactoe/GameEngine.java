@@ -21,6 +21,8 @@ public class GameEngine {
 
     public static final String COMMAND = "command";
 
+    private static final String PLAYER_1_NAME = "Player1";
+    private static final String PLAYER_2_NAME = "Player2";
     private static final String PLAYER_1_MARK = "cross";
     private static final String PLAYER_2_MARK = "circle";
     private static final int PLAYER_1_NETWORK_VALUE = -1;
@@ -50,7 +52,7 @@ public class GameEngine {
         this.currentPlayer = currentPlayer;
     }
 
-    private Player buildPlayer(PlayerType type, String mark, int networkValue) {
+    private Player buildPlayer(PlayerType type, String name, String mark, int networkValue) {
         if (type == null) {
             throw new IllegalArgumentException("Player type must be non null");
         }
@@ -60,6 +62,7 @@ public class GameEngine {
             case NEURAL_NETWORK -> players.select(NeuralNetworkPlayer.class).get();
             case DUMB_BOT -> players.select(DumbBotPlayer.class).get();
         };
+        player.setName(name);
         player.setMark(mark);
         player.setNetworkValue(networkValue);
         return player;
@@ -67,8 +70,8 @@ public class GameEngine {
 
     public void start(PlayerType playerType1, PlayerType playerType2) {
 
-        Player player1 = buildPlayer(playerType1, PLAYER_1_MARK, PLAYER_1_NETWORK_VALUE);
-        Player player2 = buildPlayer(playerType2, PLAYER_2_MARK, PLAYER_2_NETWORK_VALUE);
+        Player player1 = buildPlayer(playerType1, PLAYER_1_NAME, PLAYER_1_MARK, PLAYER_1_NETWORK_VALUE);
+        Player player2 = buildPlayer(playerType2, PLAYER_2_NAME, PLAYER_2_MARK, PLAYER_2_NETWORK_VALUE);
         player1.setNext(player2);
         player2.setNext(player1);
 
@@ -144,7 +147,7 @@ public class GameEngine {
         if (winner.isPresent() || isGridFull()) {
             gameOver = true;
             if (winner.isPresent()) {
-                sendGameOver(winner.get().getClass().getSimpleName());
+                sendGameOver(winner.get().getName());
             }
         }
     }

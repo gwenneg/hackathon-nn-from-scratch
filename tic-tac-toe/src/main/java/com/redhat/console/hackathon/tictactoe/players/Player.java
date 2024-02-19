@@ -14,6 +14,7 @@ public abstract class Player {
 
     protected Player next;
 
+    private String name;
     private String mark;
     private int networkValue;
 
@@ -25,6 +26,14 @@ public abstract class Player {
 
     public void setNext(Player next) {
         this.next = next;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMark() {
