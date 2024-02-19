@@ -8,36 +8,39 @@ html {
     justify-content: center;
 }
 header {
-    margin: 20px 0;
+    margin: 20px 0 10px 0;
     text-align: center;
-    font-family: MilkMango, serif;
-    font-size: 75px;
+    font-family: MilkMango;
+    font-size: 70px;
     color: #ccc;
 }
 #game {
     display: inline-flex;
 }
 .player {
-    font-family: MilkMango, serif;
+    font-family: MilkMango;
     color: #ccc;
+    font-size: 20px;
 }
 .grid {
     width: 600px;
     height: 600px;
-    margin: 0 30px;
     display: grid;
     gap: 15px;
     grid-template-columns: repeat(3, 1fr);
 }
-.grid > div:not(.disabled) {
-    background-color: #ccc;
+#grid-wrapper {
+    background-color: #656565;
+    margin: 0 30px;
 }
-.grid > div:hover:not(.disabled) {
-    background-color: #eee;
+.grid > div {
+    background-color: rgb(21, 21, 21);
+}
+.grid > div:hover {
+    background-color: rgb(45, 45, 45);
     cursor: pointer;
 }
 .grid > div.disabled {
-    background-color: #555;
     cursor: not-allowed;
 }
 .cross {
@@ -47,19 +50,55 @@ header {
     background: url("../images/circle.svg") center no-repeat;
 }
 footer {
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
 }
 #start, #stop {
     border: 0;
     margin: 0 20px;
-    padding: 10px 20px;
-    font-family: MilkMango, serif;
+    font-family: "Open Sans";
 }
 #info {
     text-align: center;
     color: #ffb108;
     margin: 10px 0;
     font-size: 20px;
-    font-family: MilkMango, serif;
+    font-family: "Open Sans";
+}
+#powered {
+    margin-top: 25px;
+    text-align: center;
+    color: #ccc;
+    font-size: 20px;
+    font-family: "Open Sans";
+    position: relative;
+}
+#powered img {
+    height: 20px;
+    position: relative;
+    top: 3px;
+    margin-left: 5px;
+}
+.player > h2 > img {
+    height: 27px;
+    margin-left: 5px;
+}
+button, select {
+    font-family: "Open Sans";
+    font-size: 20px;
+}
+select {
+    padding: 4px 7px;
+    border-radius: 5px;
+}
+button {
+    padding: 6px 12px;
+    border-radius: 5px;
+}
+#by {
+    text-align: center;
+    font-family: "Open Sans";
+    color: #ccc;
+    font-size: 20px;
+    margin-bottom: 30px;
 }

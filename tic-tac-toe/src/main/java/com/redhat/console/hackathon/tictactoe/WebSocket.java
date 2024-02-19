@@ -61,9 +61,6 @@ public class WebSocket {
                     int y = payload.getInteger("y");
                     engine.markFromWebSocket(x, y);
                 }
-                case "stop" -> {
-                    engine.stop();
-                }
                 case "export" -> {
                     engine.export();
                 }

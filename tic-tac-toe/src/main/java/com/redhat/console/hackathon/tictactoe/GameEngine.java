@@ -46,7 +46,6 @@ public class GameEngine {
     @PostConstruct
     void postConstruct() {
         network.init(9, 20, 20, 9);
-        stop();
     }
 
     public void setCurrentPlayer(HumanPlayer currentPlayer) {
@@ -71,20 +70,18 @@ public class GameEngine {
 
     public void start(PlayerType playerType1, PlayerType playerType2) {
 
+        for (Player[] row : grid) {
+            Arrays.fill(row, null);
+        }
+        states.clear();
+        gameOver = false;
+
         Player player1 = buildPlayer(playerType1, PLAYER_1_NAME, PLAYER_1_MARK, PLAYER_1_NETWORK_VALUE);
         Player player2 = buildPlayer(playerType2, PLAYER_2_NAME, PLAYER_2_MARK, PLAYER_2_NETWORK_VALUE);
         player1.setNext(player2);
         player2.setNext(player1);
 
         player1.play();
-    }
-
-    public void stop() {
-        for (Player[] row : grid) {
-            Arrays.fill(row, null);
-        }
-        states.clear();
-        gameOver = false;
     }
 
     private boolean isValidMark(int x, int y) {

@@ -8,29 +8,32 @@
     </head>
     <body>
         <header>Tic Tac Toe</header>
+        <p id="by">by Gwenneg Lepage and William Scalf</p>
         <section id="info"></section>
         <section id="game">
             <div class="player">
-                <h2>Player 1</h2>
+                <h2>Player 1 <img src="images/cross.svg" alt="Mark"></h2>
                 <select id="playerType1">
                     <option value="HUMAN" selected>Human</option>
                     <option value="NEURAL_NETWORK">Neural Network</option>
                     <option value="DUMB_BOT">Dumb Bot</option>
                 </select>
             </div>
-            <div class="grid">
-                <div data-x="0" data-y="0" class="disabled"></div>
-                <div data-x="0" data-y="1" class="disabled"></div>
-                <div data-x="0" data-y="2" class="disabled"></div>
-                <div data-x="1" data-y="0" class="disabled"></div>
-                <div data-x="1" data-y="1" class="disabled"></div>
-                <div data-x="1" data-y="2" class="disabled"></div>
-                <div data-x="2" data-y="0" class="disabled"></div>
-                <div data-x="2" data-y="1" class="disabled"></div>
-                <div data-x="2" data-y="2" class="disabled"></div>
+            <div id="grid-wrapper">
+                <div class="grid">
+                    <div data-x="0" data-y="0" class="disabled"></div>
+                    <div data-x="0" data-y="1" class="disabled"></div>
+                    <div data-x="0" data-y="2" class="disabled"></div>
+                    <div data-x="1" data-y="0" class="disabled"></div>
+                    <div data-x="1" data-y="1" class="disabled"></div>
+                    <div data-x="1" data-y="2" class="disabled"></div>
+                    <div data-x="2" data-y="0" class="disabled"></div>
+                    <div data-x="2" data-y="1" class="disabled"></div>
+                    <div data-x="2" data-y="2" class="disabled"></div>
+                </div>
             </div>
             <div class="player">
-                <h2>Player 2</h2>
+                <h2>Player 2 <img src="images/circle.svg" alt="Mark"></h2>
                 <select id="playerType2">
                     <option value="HUMAN">Human</option>
                     <option value="NEURAL_NETWORK" selected>Neural Network</option>
@@ -39,9 +42,11 @@
             </div>
         </section>
         <footer>
-            <button id="start">Start</button>
-            <button id="stop">Stop</button>
-            <button id="export">Export</button>
+            <button id="start">New game</button>
+            <button id="export">Export network</button>
+            <div id="powered">
+                Powered by <a href="https://quarkus.io" target="_blank"><img src="images/quarkus.svg" alt="Quarkus"></a>
+            </div>
         </footer>
     </body>
 </html>

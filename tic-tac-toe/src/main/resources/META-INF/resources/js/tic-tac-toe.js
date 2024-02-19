@@ -71,18 +71,7 @@ onDocumentReady(() => {
             "playerType2": document.getElementById("playerType2").value
         });
         SQUARES.forEach(square => {
-            square.classList.remove("disabled");
-        });
-    }
-
-    const stopButton = document.getElementById("stop");
-    stopButton.onclick = function() {
-        send({
-            "command": "stop"
-        });
-        SQUARES.forEach(square => {
-            square.classList.add("disabled");
-            square.classList.remove("cross", "circle");
+            square.classList.remove("cross", "circle", "disabled");
         });
         document.getElementById("info").innerText = "";
     }
