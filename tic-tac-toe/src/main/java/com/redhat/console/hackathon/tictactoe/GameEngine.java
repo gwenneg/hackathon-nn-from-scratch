@@ -74,6 +74,7 @@ public class GameEngine {
             Arrays.fill(row, null);
         }
         states.clear();
+        network.getActivations().clear();
         gameOver = false;
 
         Player player1 = buildPlayer(playerType1, PLAYER_1_NAME, PLAYER_1_MARK, PLAYER_1_NETWORK_VALUE);
@@ -113,6 +114,13 @@ public class GameEngine {
         JsonObject payload = new JsonObject();
         payload.put(COMMAND, "info");
         payload.put("info", info);
+        webSocket.broadcast(payload);
+    }
+
+    public void sendActivations(List<double[]> activations) {
+        JsonObject payload = new JsonObject();
+        payload.put(COMMAND, "activations");
+        payload.put("activations", activations);
         webSocket.broadcast(payload);
     }
 

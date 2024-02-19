@@ -35,6 +35,7 @@ public class NeuralNetworkPlayer extends Player {
         int y = maxPredictionIndex / 3;
         try {
             mark(x, y);
+            engine.sendActivations(network.getActivations());
         } catch (IllegalStateException e) {
             engine.setGameOver(true);
             engine.sendInfo("Neural network made a forbidden move, game was interrupted");

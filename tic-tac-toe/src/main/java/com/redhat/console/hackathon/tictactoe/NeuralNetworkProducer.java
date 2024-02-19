@@ -1,11 +1,11 @@
 package com.redhat.console.hackathon.tictactoe;
 
 import com.redhat.console.hackathon.neuralnetworks.NeuralNetwork;
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Singleton;
 
 public class NeuralNetworkProducer {
 
-    @ApplicationScoped
+    @Singleton
     NeuralNetwork produce() {
         return new NeuralNetwork();
     }

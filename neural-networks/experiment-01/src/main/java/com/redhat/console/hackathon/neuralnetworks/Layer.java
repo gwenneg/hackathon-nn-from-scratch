@@ -25,6 +25,8 @@ public class Layer {
     private final double[] biases;
 
     @JsonIgnore
+    private NeuralNetwork network;
+    @JsonIgnore
     private Layer previous;
     @JsonIgnore
     private Layer next;
@@ -37,8 +39,9 @@ public class Layer {
         biases = null;
     }
 
-    public Layer(Layer previous, int size, ActivationFunction activationFunction) {
+    public Layer(NeuralNetwork network, Layer previous, int size, ActivationFunction activationFunction) {
 
+        this.network = network;
         this.previous = previous;
         this.size = size;
         this.activationFunction = activationFunction;
@@ -90,6 +93,7 @@ public class Layer {
                     double value = matricesDotProductResult[i] + biases[i];
                     matricesDotProductResult[i] = activationFunction.apply(value);
                 }
+                network.getActivations().add(matricesDotProductResult);
                 if (next == null) {
                     return matricesDotProductResult;
                 } else {
