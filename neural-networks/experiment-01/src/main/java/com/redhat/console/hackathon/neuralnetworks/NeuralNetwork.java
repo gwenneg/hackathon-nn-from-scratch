@@ -34,6 +34,10 @@ public class NeuralNetwork {
     public double[] feed(double[] inputs) {
         return layers.get(0).forward(inputs);
     }
+    public void train(double[] inputs, double learning_rate, double[] expected_outputs) {
+        double[] actual_outputs = feed(inputs);
+        layers.get(0).backward(inputs, learning_rate, expected_outputs);
+    }
 
     public List<double[]> getActivations() {
         return activations;

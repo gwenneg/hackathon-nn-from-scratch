@@ -2,10 +2,10 @@ package com.redhat.console.hackathon.neuralnetworks;
 
 import org.junit.jupiter.api.Test;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NeuralNetworkTest {
 
@@ -70,5 +70,55 @@ public class NeuralNetworkTest {
         NeuralNetwork network2 = Exporter.loadFromFile();
         System.out.println(network2.getLayers().size());
         Exporter.saveToFile(network2);
+    }
+
+    @Test
+    void testSimpleNetworkImprovesWithTraining() {
+        NeuralNetwork network = new NeuralNetwork();
+        network.init(2, 3, 3, 1);
+
+        double[] inputs = new double[] {0, 1};
+        double expected_output = 0.5;
+        double naive_output = network.feed(new double[] {0, 1})[0];
+        for (int i = 0; i < 100; i++)
+            network.train(inputs, 0.1, new double[]{expected_output});
+
+        double trained_output = network.feed(inputs)[0];
+
+        assertTrue(Math.abs(expected_output - trained_output) < Math.abs(expected_output - naive_output));
+    }
+
+    @Test
+    void testNetworkCanLearnTicTacToe() {
+        NeuralNetwork network = new NeuralNetwork();
+        network.init(9, 6, 6, 6, 9);
+
+        for (int i = 0; i < 100000; i++) {
+            double[] inputs = getRandomizedBoard();
+            network.train(inputs, 0.1, getExpectedMoves(inputs));
+        }
+
+        double[] board = getRandomizedBoard();
+        double[] prediction = network.feed(board);
+    }
+
+    private double[] getRandomizedBoard() {
+        SecureRandom random = new SecureRandom();
+        double[] board = new double[9];
+        for (int i = 0; i < board.length; i++) {
+            double v = random.nextDouble();
+            if (v < 0.33)
+                board[i] = -1;
+            else if (v > 0.66)
+                board[i] = 1;
+        }
+        return board;
+    }
+    private double[] getExpectedMoves(double[] board) {
+        double[] moves = new double[board.length];
+        for (int i = 0; i < board.length; i++)
+            if (board[i] == 0)
+                moves[i] = 1;
+        return moves;
     }
 }
