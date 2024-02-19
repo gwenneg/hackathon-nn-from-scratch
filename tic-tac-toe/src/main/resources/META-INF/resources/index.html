@@ -10,15 +10,6 @@
         <header>Tic Tac Toe</header>
         <p id="by">by Gwenneg Lepage and William Scalf</p>
         <section id="game">
-            <div class="player">
-                <h2>Player 1 <img src="images/cross.svg" alt="Mark"></h2>
-                <select id="playerType1">
-                    <option value="HUMAN" selected>Human</option>
-                    <option value="NEURAL_NETWORK">Neural Network</option>
-                    <option value="DUMB_BOT">Dumb Bot</option>
-                </select>
-                <p id="player1-status"></p>
-            </div>
             <div id="grid-wrapper">
                 <div class="grid">
                     <div data-x="0" data-y="0" class="disabled"></div>
@@ -33,6 +24,13 @@
                 </div>
             </div>
             <div class="player">
+                <h2>Player 1 <img src="images/cross.svg" alt="Mark"></h2>
+                <select id="playerType1">
+                    <option value="HUMAN" selected>Human</option>
+                    <option value="NEURAL_NETWORK">Neural Network</option>
+                    <option value="DUMB_BOT">Dumb Bot</option>
+                </select>
+                <p id="player1-status"></p>
                 <h2>Player 2 <img src="images/circle.svg" alt="Mark"></h2>
                 <select id="playerType2">
                     <option value="HUMAN">Human</option>
@@ -40,14 +38,60 @@
                     <option value="DUMB_BOT">Dumb Bot</option>
                 </select>
                 <p id="player2-status"></p>
+                <p><button id="start">New game</button></p>
+                <p><button id="export">Export network</button></p>
+                <p id="powered">Powered by <a href="https://quarkus.io" target="_blank"><img src="images/quarkus.svg" alt="Quarkus"></a></p>
+            </div>
+            <div id="network">
+                <span id="input">Input layer</span>
+                <span id="hidden">Hidden layers</span>
+                <span id="output">Output layer</span>
+                <img src="images/network.svg" alt="Neural network" class="network-background">
+                <img src="images/neuron.svg" data-layer="0" data-neuron="0" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="0" data-neuron="1" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="0" data-neuron="2" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="0" data-neuron="3" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="0" data-neuron="4" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="0" data-neuron="5" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="0" data-neuron="6" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="0" data-neuron="7" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="0" data-neuron="8" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="0" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="1" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="2" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="3" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="4" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="5" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="6" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="7" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="8" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="9" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="10" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="11" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="12" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="13" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="1" data-neuron="14" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="0" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="1" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="2" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="3" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="4" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="5" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="6" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="7" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="8" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="9" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="2" data-neuron="10" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="3" data-neuron="0" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="3" data-neuron="1" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="3" data-neuron="2" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="3" data-neuron="3" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="3" data-neuron="4" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="3" data-neuron="5" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="3" data-neuron="6" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="3" data-neuron="7" alt="Neuron">
+                <img src="images/neuron.svg" data-layer="3" data-neuron="8" alt="Neuron">
             </div>
         </section>
-        <footer>
-            <button id="start">New game</button>
-            <button id="export">Export network</button>
-            <div id="powered">
-                Powered by <a href="https://quarkus.io" target="_blank"><img src="images/quarkus.svg" alt="Quarkus"></a>
-            </div>
-        </footer>
     </body>
 </html>

@@ -9,6 +9,9 @@ WS.onmessage = function(message) {
         case "info":
             console.error(payload.info);
             break;
+        case "activations":
+            updateActivations(payload.activations);
+            break;
         case "game_over":
             const SQUARES = document.querySelectorAll(".grid > div");
             SQUARES.forEach(square => {
@@ -31,6 +34,22 @@ WS.onmessage = function(message) {
 
 function send(payload) {
     WS.send(JSON.stringify(payload));
+}
+
+function updateActivations(activations) {
+    for (i = 0; i < 9; i++) {
+        let neuron = document.querySelector('[data-layer="0"][data-neuron="' + i + '"]');
+        neuron.style.opacity = 1;
+    }
+    for (i = 0; i < activations.length; i++) {
+        for (j = 0; j < activations[i].length; j++) {
+            let neuron = document.querySelector('[data-layer="' + (i + 1) + '"][data-neuron="' + j + '"]');
+            neuron.style.opacity = (activations[i][j]);
+            if (i < activations.length - 1) {
+                neuron.style.opacity = neuron.style.opacity * 2;
+            }
+        }
+    }
 }
 
 function onDocumentReady(fn) {
@@ -82,6 +101,7 @@ onDocumentReady(() => {
         });
         document.getElementById("player1-status").innerText = "";
         document.getElementById("player2-status").innerText = "";
+        document.querySelectorAll("#network > img:not(.network-background)").forEach(neuron => neuron.style.opacity = 0);
     }
 
     const exportButton = document.getElementById("export");

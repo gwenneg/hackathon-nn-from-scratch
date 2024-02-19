@@ -15,11 +15,11 @@ public class NeuralNetworkPlayer extends Player {
     protected void playImpl() {
         Log.info("Neural network is playing...");
         delayMove();
-        networkMove();
+        networkMove(0);
         next.play();
     }
 
-    private void networkMove() {
+    private void networkMove(int attempts) {
 
         double[] state = getState();
         double[] predictions = network.feed(state);
@@ -33,12 +33,19 @@ public class NeuralNetworkPlayer extends Player {
 
         int x = maxPredictionIndex % 3;
         int y = maxPredictionIndex / 3;
+
         try {
             mark(x, y);
             engine.sendActivations(network.getActivations());
+            network.getActivations().clear();
         } catch (IllegalStateException e) {
-            engine.setGameOver(true);
-            engine.sendInfo("Neural network made a forbidden move, game was interrupted");
+            // TODO For demo purposes only, remove later.
+            if (attempts < 10) {
+                networkMove(++attempts);
+            } else {
+                engine.setGameOver(true);
+                engine.sendInfo("Neural network made a forbidden move, game was interrupted");
+            }
         }
     }
 

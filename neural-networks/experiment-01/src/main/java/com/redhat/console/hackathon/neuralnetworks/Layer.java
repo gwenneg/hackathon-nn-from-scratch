@@ -104,7 +104,7 @@ public class Layer {
     }
 
     private void initWeightsAndBiases() {
-        double weightBoundary = Math.sqrt(6) / Math.sqrt(size + previous.getSize());
+        double weightBoundary = Math.sqrt(12) / Math.sqrt(size + previous.getSize());
         Random random = new SecureRandom();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < previous.getSize(); j++) {

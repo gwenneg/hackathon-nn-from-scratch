@@ -45,7 +45,7 @@ public class GameEngine {
 
     @PostConstruct
     void postConstruct() {
-        network.init(9, 20, 20, 9);
+        network.init(9, 15, 11, 9);
     }
 
     public void setCurrentPlayer(HumanPlayer currentPlayer) {
