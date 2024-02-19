@@ -21,6 +21,7 @@ header {
     font-family: MilkMango;
     color: #ccc;
     font-size: 20px;
+    text-align: center;
 }
 .grid {
     width: 600px;
@@ -101,4 +102,10 @@ button {
     color: #ccc;
     font-size: 20px;
     margin-bottom: 30px;
+}
+#player1-status, #player2-status {
+    font-family: MilkMango;
+    font-size: 30px;
+    margin-top: 25px;
+    color: #f00;
 }

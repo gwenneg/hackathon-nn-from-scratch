@@ -146,6 +146,8 @@ public class GameEngine {
             gameOver = true;
             if (winner.isPresent()) {
                 sendGameOver(winner.get().getName());
+            } else {
+                sendGameOver("");
             }
         }
     }

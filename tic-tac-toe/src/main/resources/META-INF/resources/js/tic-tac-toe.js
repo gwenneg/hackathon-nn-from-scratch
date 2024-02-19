@@ -7,14 +7,21 @@ WS.onmessage = function(message) {
             updateGrid(payload.state);
             break;
         case "info":
-            document.getElementById("info").textContent = payload.info;
+            console.error(payload.info);
             break;
         case "game_over":
             const SQUARES = document.querySelectorAll(".grid > div");
             SQUARES.forEach(square => {
                 square.classList.add("disabled");
             });
-            document.getElementById("info").textContent = payload.player + " won!";
+            if (payload.player === "Player1") {
+                document.getElementById("player1-status").textContent = "WINNER";
+            } else if (payload.player === "Player2") {
+                document.getElementById("player2-status").textContent = "WINNER";
+            } else {
+                document.getElementById("player1-status").textContent = "DRAW";
+                document.getElementById("player2-status").textContent = "DRAW";
+            }
             break;
         default:
             console.warn("Unexpected command: " + payload.command);
@@ -73,7 +80,8 @@ onDocumentReady(() => {
         SQUARES.forEach(square => {
             square.classList.remove("cross", "circle", "disabled");
         });
-        document.getElementById("info").innerText = "";
+        document.getElementById("player1-status").innerText = "";
+        document.getElementById("player2-status").innerText = "";
     }
 
     const exportButton = document.getElementById("export");
