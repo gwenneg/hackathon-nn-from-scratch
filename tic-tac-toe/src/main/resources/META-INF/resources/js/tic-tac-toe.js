@@ -84,6 +84,7 @@ onDocumentReady(() => {
             square.classList.add("disabled");
             square.classList.remove("cross", "circle");
         });
+        document.getElementById("info").innerText = "";
     }
 
 });

@@ -58,6 +58,8 @@ footer {
 }
 #info {
     text-align: center;
-    color: #ccc;
+    color: #ffb108;
     margin: 10px 0;
+    font-size: 20px;
+    font-family: MilkMango, serif;
 }
