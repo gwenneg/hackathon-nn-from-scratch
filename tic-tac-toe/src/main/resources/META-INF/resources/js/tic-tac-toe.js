@@ -87,4 +87,11 @@ onDocumentReady(() => {
         document.getElementById("info").innerText = "";
     }
 
+    const exportButton = document.getElementById("export");
+    exportButton.onclick = function() {
+        send({
+            "command": "export"
+        });
+    }
+
 });

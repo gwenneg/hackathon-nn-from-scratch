@@ -1,5 +1,6 @@
 package com.redhat.console.hackathon.tictactoe;
 
+import com.redhat.console.hackathon.neuralnetworks.Exporter;
 import com.redhat.console.hackathon.neuralnetworks.NeuralNetwork;
 import com.redhat.console.hackathon.tictactoe.players.*;
 import io.quarkus.runtime.Startup;
@@ -196,5 +197,9 @@ public class GameEngine {
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+    }
+
+    public void export() {
+        Exporter.saveToFile(network);
     }
 }

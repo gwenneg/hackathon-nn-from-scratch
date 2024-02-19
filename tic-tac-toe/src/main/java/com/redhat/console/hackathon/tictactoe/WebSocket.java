@@ -64,6 +64,9 @@ public class WebSocket {
                 case "stop" -> {
                     engine.stop();
                 }
+                case "export" -> {
+                    engine.export();
+                }
                 default -> {
                     Log.warnf("Unexpected command: %s", command);
                 }
