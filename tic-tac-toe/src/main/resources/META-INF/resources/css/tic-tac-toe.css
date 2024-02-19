@@ -29,14 +29,15 @@ header {
     gap: 15px;
     grid-template-columns: repeat(3, 1fr);
 }
-.grid > div {
+.grid > div:not(.disabled) {
     background-color: #ccc;
 }
 .grid > div:hover:not(.disabled) {
     background-color: #eee;
     cursor: pointer;
 }
-.disabled {
+.grid > div.disabled {
+    background-color: #555;
     cursor: not-allowed;
 }
 .cross {
@@ -54,4 +55,9 @@ footer {
     margin: 0 20px;
     padding: 10px 20px;
     font-family: MilkMango, serif;
+}
+#info {
+    text-align: center;
+    color: #ccc;
+    margin: 10px 0;
 }

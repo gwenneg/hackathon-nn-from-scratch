@@ -7,10 +7,14 @@ WS.onmessage = function(message) {
             updateGrid(payload.state);
             break;
         case "info":
-            console.log(payload.info);
+            document.getElementById("info").textContent = payload.info;
             break;
         case "game_over":
-            // TODO
+            const SQUARES = document.querySelectorAll(".grid > div");
+            SQUARES.forEach(square => {
+                square.classList.add("disabled");
+            });
+            document.getElementById("info").textContent = payload.player + " won!";
             break;
         default:
             console.warn("Unexpected command: " + payload.command);
@@ -31,11 +35,12 @@ function onDocumentReady(fn) {
 }
 
 function updateGrid(state) {
-    for (i = 0; i < state.length; i++) {
-        for (j = 0; j < state[i].length; j++) {
-            if (state[i][j].length > 0) {
-                const SQUARE = document.querySelector('[data-x="' + i + '"][data-y="' + j + '"]');
-                SQUARE.classList.add(state[i][j]);
+    for (x = 0; x < state.length; x++) {
+        for (y = 0; y < state[x].length; y++) {
+            if (state[x][y].length > 0) {
+                const SQUARE = document.querySelector('[data-x="' + x + '"][data-y="' + y + '"]');
+                SQUARE.classList.add(state[x][y]);
+                SQUARE.classList.add("disabled");
             }
         }
     }
@@ -43,9 +48,9 @@ function updateGrid(state) {
 
 onDocumentReady(() => {
 
-    const squares = document.querySelectorAll(".grid > div");
+    const SQUARES = document.querySelectorAll(".grid > div");
 
-    squares.forEach(square => {
+    SQUARES.forEach(square => {
         square.onclick = function() {
             if (!square.classList.contains("disabled")) {
                 square.classList.add("disabled");
@@ -65,6 +70,9 @@ onDocumentReady(() => {
             "playerType1": document.getElementById("playerType1").value,
             "playerType2": document.getElementById("playerType2").value
         });
+        SQUARES.forEach(square => {
+            square.classList.remove("disabled");
+        });
     }
 
     const stopButton = document.getElementById("stop");
@@ -72,8 +80,9 @@ onDocumentReady(() => {
         send({
             "command": "stop"
         });
-        squares.forEach(square => {
-            square.classList.remove("disabled", "cross", "circle");
+        SQUARES.forEach(square => {
+            square.classList.add("disabled");
+            square.classList.remove("cross", "circle");
         });
     }
 
