@@ -34,7 +34,7 @@ public class NeuralNetworkPlayer extends Player {
             tries++;
             lessthan = predictions[maxPredictionIndex];
             Log.infof("Guessed the %dth item", maxPredictionIndex);
-        } while (!engine.isValidMark(x, y) && tries < 10);
+        } while (!engine.isValidMark(x, y) && tries < 20);
         if (tries > 1) {
             //Train it to favor the backup option that was selected with a higher learning rate the more tries it took
             double[] expected = getPredication(x, y);

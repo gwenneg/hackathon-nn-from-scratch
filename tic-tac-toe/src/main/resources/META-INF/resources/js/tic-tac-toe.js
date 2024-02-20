@@ -52,12 +52,15 @@ function updateActivations(activations) {
         neuron.style.opacity = 1;
     }
     for (i = 0; i < activations.length; i++) {
+        let max = 0;
+        for (j = 0; j < activations[i].length; j++) {
+            if (activations[i][j] > max) {
+                max = activations[i][j];
+            }
+        }
         for (j = 0; j < activations[i].length; j++) {
             let neuron = document.querySelector('[data-layer="' + (i + 1) + '"][data-neuron="' + j + '"]');
-            neuron.style.opacity = (activations[i][j]);
-            if (i < activations.length - 1) {
-                neuron.style.opacity = neuron.style.opacity * 2;
-            }
+            neuron.style.opacity = activations[i][j] / max;
         }
     }
 }
