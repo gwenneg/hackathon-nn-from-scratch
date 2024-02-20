@@ -1,5 +1,6 @@
 package com.redhat.console.hackathon.neuralnetworks;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
@@ -89,7 +90,8 @@ public class NeuralNetworkTest {
         assertTrue(Math.abs(expected_output - trained_output) < Math.abs(expected_output - naive_output));
     }
 
-    //@Test
+    @Test
+    @Disabled
     void testNetworkCanLearnTicTacToe() {
         NeuralNetwork network = new NeuralNetwork();
         network.init(9, 6, 6, 6, 9);
