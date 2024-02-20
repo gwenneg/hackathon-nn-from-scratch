@@ -25,11 +25,21 @@ WS.onmessage = function(message) {
                 document.getElementById("player1-status").textContent = "DRAW";
                 document.getElementById("player2-status").textContent = "DRAW";
             }
+            if (demoMode) {
+                sleep(1000).then(() => {
+                    const SQUARES = document.querySelectorAll(".grid > div");
+                    start(SQUARES);
+                });
+            }
             break;
         default:
             console.warn("Unexpected command: " + payload.command);
             break;
     }
+}
+
+async function sleep(ms) {
+    await new Promise(r => setTimeout(r, ms));
 }
 
 function send(payload) {
@@ -72,6 +82,22 @@ function updateGrid(state) {
     }
 }
 
+function start(SQUARES) {
+    send({
+        "command": "start",
+        "playerType1": document.getElementById("playerType1").value,
+        "playerType2": document.getElementById("playerType2").value
+    });
+    SQUARES.forEach(square => {
+        square.classList.remove("cross", "circle", "disabled");
+    });
+    document.getElementById("player1-status").innerText = "";
+    document.getElementById("player2-status").innerText = "";
+    document.querySelectorAll("#network > img:not(.network-background)").forEach(neuron => neuron.style.opacity = 0);
+}
+
+let demoMode = false;
+
 onDocumentReady(() => {
 
     const SQUARES = document.querySelectorAll(".grid > div");
@@ -91,17 +117,15 @@ onDocumentReady(() => {
 
     const startButton = document.getElementById("start");
     startButton.onclick = function() {
-        send({
-            "command": "start",
-            "playerType1": document.getElementById("playerType1").value,
-            "playerType2": document.getElementById("playerType2").value
-        });
-        SQUARES.forEach(square => {
-            square.classList.remove("cross", "circle", "disabled");
-        });
-        document.getElementById("player1-status").innerText = "";
-        document.getElementById("player2-status").innerText = "";
-        document.querySelectorAll("#network > img:not(.network-background)").forEach(neuron => neuron.style.opacity = 0);
+        start(SQUARES);
+    }
+
+    const demoButton = document.getElementById("demo");
+    demoButton.onclick = function() {
+        demoMode = !demoMode;
+        if (demoMode) {
+            start(SQUARES);
+        }
     }
 
     const exportButton = document.getElementById("export");
