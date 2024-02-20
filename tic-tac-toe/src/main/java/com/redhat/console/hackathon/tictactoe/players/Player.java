@@ -24,6 +24,10 @@ public abstract class Player {
         }
     }
 
+    public void setDelayInMs(int delayInMs) {
+        this.delayInMs = delayInMs;
+    }
+
     public void setNext(Player next) {
         this.next = next;
     }

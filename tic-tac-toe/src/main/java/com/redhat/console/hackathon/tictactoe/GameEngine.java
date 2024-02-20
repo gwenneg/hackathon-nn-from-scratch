@@ -60,7 +60,7 @@ public class GameEngine {
         return player;
     }
 
-    public void start(PlayerType playerType1, PlayerType playerType2) {
+    public void start(PlayerType playerType1, PlayerType playerType2, boolean demoMode) {
 
         for (Player[] row : grid) {
             Arrays.fill(row, null);
@@ -73,6 +73,11 @@ public class GameEngine {
         Player player2 = buildPlayer(playerType2, PLAYER_2_NAME, PLAYER_2_MARK, PLAYER_2_NETWORK_VALUE);
         player1.setNext(player2);
         player2.setNext(player1);
+
+        if (demoMode) {
+            player1.setDelayInMs(50);
+            player2.setDelayInMs(50);
+        }
 
         player1.play();
     }

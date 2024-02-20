@@ -26,7 +26,7 @@ WS.onmessage = function(message) {
                 document.getElementById("player2-status").textContent = "DRAW";
             }
             if (demoMode) {
-                sleep(1000).then(() => {
+                sleep(200).then(() => {
                     const SQUARES = document.querySelectorAll(".grid > div");
                     start(SQUARES);
                 });
@@ -86,7 +86,8 @@ function start(SQUARES) {
     send({
         "command": "start",
         "playerType1": document.getElementById("playerType1").value,
-        "playerType2": document.getElementById("playerType2").value
+        "playerType2": document.getElementById("playerType2").value,
+        "demoMode": demoMode
     });
     SQUARES.forEach(square => {
         square.classList.remove("cross", "circle", "disabled");
@@ -124,6 +125,8 @@ onDocumentReady(() => {
     demoButton.onclick = function() {
         demoMode = !demoMode;
         if (demoMode) {
+            document.getElementById("playerType1").value = "DUMB_BOT";
+            document.getElementById("playerType2").value = "NEURAL_NETWORK";
             start(SQUARES);
         }
     }

@@ -54,7 +54,8 @@ public class WebSocket {
                 case "start" -> {
                     PlayerType playerType1 = PlayerType.valueOf(payload.getString("playerType1"));
                     PlayerType playerType2 = PlayerType.valueOf(payload.getString("playerType2"));
-                    engine.start(playerType1, playerType2);
+                    boolean demoMode = payload.getBoolean("demoMode", false);
+                    engine.start(playerType1, playerType2, demoMode);
                 }
                 case "mark" -> {
                     int x = payload.getInteger("x");
