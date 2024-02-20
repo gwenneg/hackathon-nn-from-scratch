@@ -97,19 +97,16 @@ function start(SQUARES) {
     });
     document.getElementById("player1-status").innerText = "";
     document.getElementById("player2-status").innerText = "";
-    document.querySelectorAll("#network > img:not(.network-background)").forEach(neuron => neuron.style.opacity = 0);
+    document.querySelectorAll(".activation").forEach(neuron => neuron.style.opacity = 0);
 }
 
 let demoMode = false;
 
 onDocumentReady(() => {
 
-    // TODO To be used later...
-    /*
-    let body = document.querySelector("body");
+    let body = document.getElementById("game");
     let networkDef = [9, 15, 11, 9];
-    drawNeuralNetwork(body, "neural-network-background", "#4dabf7", ...networkDef);
-    */
+    drawNeuralNetwork(body, "network", "#4dabf7", ...networkDef);
 
     const SQUARES = document.querySelectorAll(".grid > div");
 

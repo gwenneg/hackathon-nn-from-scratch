@@ -44,6 +44,7 @@ function drawNeuralNetwork(parentElement, elementId, color, ...networkDef) {
             activation.setAttribute("height", NEURON_RADIUS * 2);
             activation.setAttribute("data-layer", i);
             activation.setAttribute("data-neuron", j);
+            activation.classList.add("activation");
             activation.style.position = "absolute";
             activation.style.top = layers[i][j].cy - NEURON_RADIUS;
             activation.style.left = layers[i][j].cx - NEURON_RADIUS;
