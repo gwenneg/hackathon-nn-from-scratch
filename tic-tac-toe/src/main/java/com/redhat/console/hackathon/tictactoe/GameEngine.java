@@ -77,7 +77,7 @@ public class GameEngine {
         player1.play();
     }
 
-    private boolean isValidMark(int x, int y) {
+    public boolean isValidMark(int x, int y) {
         return x >= 0 && x < 3 && y >= 0 && y < 3 && grid[x][y] == null;
     }
 

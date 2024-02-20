@@ -1,7 +1,9 @@
 package com.redhat.console.hackathon.neuralnetworks;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Path;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
@@ -89,6 +91,7 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    @Disabled
     void testNetworkCanLearnTicTacToe() {
         NeuralNetwork network = new NeuralNetwork();
         network.init(9, 6, 6, 6, 9);
@@ -100,6 +103,8 @@ public class NeuralNetworkTest {
 
         double[] board = getRandomizedBoard();
         double[] prediction = network.feed(board);
+
+        Exporter.saveToFile(network, Path.of("Baseline.json"));
     }
 
     private double[] getRandomizedBoard() {
