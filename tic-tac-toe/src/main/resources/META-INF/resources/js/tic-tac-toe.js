@@ -104,6 +104,13 @@ let demoMode = false;
 
 onDocumentReady(() => {
 
+    // TODO To be used later...
+    /*
+    let body = document.querySelector("body");
+    let networkDef = [9, 15, 11, 9];
+    drawNeuralNetworkBackground(body, "neural-network-background", "#4dabf7", ...networkDef);
+    */
+
     const SQUARES = document.querySelectorAll(".grid > div");
 
     SQUARES.forEach(square => {
