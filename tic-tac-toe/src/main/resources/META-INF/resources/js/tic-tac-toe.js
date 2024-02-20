@@ -105,7 +105,7 @@ let demoMode = false;
 onDocumentReady(() => {
 
     let body = document.getElementById("game");
-    let networkDef = [9, 15, 11, 9];
+    let networkDef = [9, 32, 32, 32, 9];
     drawNeuralNetwork(body, "network", "#4dabf7", ...networkDef);
 
     const SQUARES = document.querySelectorAll(".grid > div");

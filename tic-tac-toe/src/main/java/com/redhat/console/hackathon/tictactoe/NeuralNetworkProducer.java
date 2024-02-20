@@ -8,7 +8,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 public class NeuralNetworkProducer {
 
-    @ConfigProperty(name = "neural-network.load-from-file", defaultValue = "true")
+    @ConfigProperty(name = "neural-network.load-from-file", defaultValue = "false")
     boolean loadFromFile;
 
     @Singleton
@@ -19,7 +19,7 @@ public class NeuralNetworkProducer {
         } else {
             Log.info("Creating a new neural network...");
             NeuralNetwork network = new NeuralNetwork();
-            network.init(9, 15, 11, 9);
+            network.init(9, 32, 32, 32, 9);
             return network;
         }
     }

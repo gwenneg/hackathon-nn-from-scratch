@@ -4,7 +4,7 @@ function drawNeuralNetwork(parentElement, elementId, color, ...networkDef) {
     const NEURON_RADIUS = 15;
     const NEURON_STROKE_WIDTH = 4;
     const NEURON_SPACING = 1;
-    const SYNAPSE_STROKE_WIDTH = 0.5;
+    const SYNAPSE_STROKE_WIDTH = 0.2;
 
     let div = document.createElement("div");
     div.setAttribute("id", elementId);
