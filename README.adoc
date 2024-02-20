@@ -1,5 +1,9 @@
 = Build an artificial neural network from scratch
 
+== Prerequisite
+
+Java 17 or newer is required to build and run the game.
+
 == Maven Wrapper
 
 This repository depends on link:https://maven.apache.org/wrapper/[Apache Maven Wrapper].
@@ -9,5 +13,6 @@ Simply run `./mvnw clean install` and the wrapper will download Maven, if needed
 
 == How to start the game
 
-1. Run `./mvnw clean quarkus:dev -pl :tic-tac-toe`
-2. Open http://localhost:8080/
+1. Build the project with `./mvnw clean install`
+2. Run `./mvnw clean quarkus:dev -pl :tic-tac-toe`
+3. Open http://localhost:8080/ and play!
