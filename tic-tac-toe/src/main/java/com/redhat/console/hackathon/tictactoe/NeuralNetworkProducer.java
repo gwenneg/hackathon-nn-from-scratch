@@ -8,7 +8,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 public class NeuralNetworkProducer {
 
-    @ConfigProperty(name = "neural-network.load-from-file", defaultValue = "false")
+    @ConfigProperty(name = "neural-network.load-from-file", defaultValue = "true")
     boolean loadFromFile;
 
     @Singleton

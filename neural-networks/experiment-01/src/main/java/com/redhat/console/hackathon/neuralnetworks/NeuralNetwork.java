@@ -1,10 +1,13 @@
 package com.redhat.console.hackathon.neuralnetworks;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.*;
 
 public class NeuralNetwork {
 
     private final List<Layer> layers = new ArrayList<>();
+    @JsonIgnore
     private final List<double[]> activations = new ArrayList<>();
 
     public List<Layer> getLayers() {

@@ -26,7 +26,9 @@ public class Layer {
 
     @JsonIgnore
     private NeuralNetwork network;
+    @JsonIgnore
     private double[] lastActivations;
+    @JsonIgnore
     private double[] lastZ;
 
     @JsonIgnore
