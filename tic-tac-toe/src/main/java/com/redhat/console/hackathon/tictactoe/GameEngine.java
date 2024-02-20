@@ -3,10 +3,8 @@ package com.redhat.console.hackathon.tictactoe;
 import com.redhat.console.hackathon.neuralnetworks.Exporter;
 import com.redhat.console.hackathon.neuralnetworks.NeuralNetwork;
 import com.redhat.console.hackathon.tictactoe.players.*;
-import io.quarkus.runtime.Startup;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
@@ -16,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Startup
 @ApplicationScoped
 public class GameEngine {
 
@@ -42,11 +39,6 @@ public class GameEngine {
     private final List<double[]> states = new ArrayList<>();
     private HumanPlayer currentPlayer;
     private boolean gameOver;
-
-    @PostConstruct
-    void postConstruct() {
-        network.init(9, 15, 11, 9);
-    }
 
     public void setCurrentPlayer(HumanPlayer currentPlayer) {
         this.currentPlayer = currentPlayer;

@@ -58,14 +58,15 @@ public class Exporter {
 
         List<Layer> layers = network.getLayers();
         for (int i = 0; i < layers.size(); i++) {
+            layers.get(i).setNetwork(network);
+            Layer current = layers.get(i);
             if (i > 0) {
                 Layer previous = layers.get(i - 1);
-                Layer current = layers.get(i);
                 current.setPrevious(previous);
-                if (i < layers.size() - 1) {
-                    Layer next = layers.get(i + 1);
-                    current.setNext(next);
-                }
+            }
+            if (i < layers.size() - 1) {
+                Layer next = layers.get(i + 1);
+                current.setNext(next);
             }
         }
 
@@ -78,7 +79,7 @@ public class Exporter {
 
     private static String loadNetworkFromResources(String fileName) {
 
-        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        ClassLoader classLoader = Exporter.class.getClassLoader();
         if (classLoader == null) {
             throw new IllegalStateException("ClassLoader not found");
         }

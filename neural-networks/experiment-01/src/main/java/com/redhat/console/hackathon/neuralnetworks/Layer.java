@@ -65,6 +65,10 @@ public class Layer {
         return size;
     }
 
+    public void setNetwork(NeuralNetwork network) {
+        this.network = network;
+    }
+
     public void setPrevious(Layer previous) {
         this.previous = previous;
     }
