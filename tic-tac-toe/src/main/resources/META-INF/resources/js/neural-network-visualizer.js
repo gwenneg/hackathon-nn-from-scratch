@@ -1,3 +1,5 @@
+let activations = [];
+
 function drawNeuralNetwork(parentElement, elementId, color, ...networkDef) {
 
     const LAYER_SPACING = 125;
@@ -28,6 +30,7 @@ function drawNeuralNetwork(parentElement, elementId, color, ...networkDef) {
     }
 
     for (i = 0; i < layers.length; i++) {
+        activations[i] = [];
         for (j = 0; j < layers[i].length; j++) {
 
             let neuron = document.createElementNS("http://www.w3.org/2000/svg", "circle");
@@ -42,13 +45,13 @@ function drawNeuralNetwork(parentElement, elementId, color, ...networkDef) {
             let activation = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             activation.setAttribute("width", NEURON_RADIUS * 2);
             activation.setAttribute("height", NEURON_RADIUS * 2);
-            activation.setAttribute("data-layer", i);
-            activation.setAttribute("data-neuron", j);
-            activation.classList.add("activation");
             activation.style.position = "absolute";
             activation.style.top = layers[i][j].cy - NEURON_RADIUS;
             activation.style.left = layers[i][j].cx - NEURON_RADIUS;
+            activation.style.opacity = 0;
             div.append(activation);
+
+            activations[i][j] = activation;
 
             let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
             circle.setAttribute("cx", NEURON_RADIUS);
@@ -74,4 +77,8 @@ function drawNeuralNetwork(parentElement, elementId, color, ...networkDef) {
 
     networkBackground.setAttribute("width", (networkDef.length - 1) * LAYER_SPACING + (NEURON_RADIUS + NEURON_STROKE_WIDTH) * 2);
     networkBackground.setAttribute("height", Math.max(...networkDef) * (NEURON_RADIUS + NEURON_STROKE_WIDTH) * 2 + (Math.max(...networkDef) - 1) * NEURON_SPACING);
+}
+
+function activateNeuron(layer, neuron, opacity) {
+    activations[layer][neuron].style.opacity = opacity;
 }

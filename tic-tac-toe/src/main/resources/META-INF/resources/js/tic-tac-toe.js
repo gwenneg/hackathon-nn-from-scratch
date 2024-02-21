@@ -46,21 +46,14 @@ function send(payload) {
     WS.send(JSON.stringify(payload));
 }
 
-function updateActivations(activations) {
+function updateActivations(values) {
     for (i = 0; i < 9; i++) {
-        let neuron = document.querySelector('[data-layer="0"][data-neuron="' + i + '"]');
-        neuron.style.opacity = 1;
+        activateNeuron(0, i, 1);
     }
-    for (i = 0; i < activations.length; i++) {
-        let max = 0;
-        for (j = 0; j < activations[i].length; j++) {
-            if (activations[i][j] > max) {
-                max = activations[i][j];
-            }
-        }
-        for (j = 0; j < activations[i].length; j++) {
-            let neuron = document.querySelector('[data-layer="' + (i + 1) + '"][data-neuron="' + j + '"]');
-            neuron.style.opacity = activations[i][j] / max;
+    for (i = 0; i < values.length; i++) {
+        let maxValue = Math.max(...values[i]);
+        for (j = 0; j < values[i].length; j++) {
+            activateNeuron(i + 1, j, values[i][j] / maxValue);
         }
     }
 }
@@ -97,7 +90,9 @@ function start(SQUARES) {
     });
     document.getElementById("player1-status").innerText = "";
     document.getElementById("player2-status").innerText = "";
-    document.querySelectorAll(".activation").forEach(neuron => neuron.style.opacity = 0);
+    for (i = 0; i < 9; i++) {
+        activateNeuron(0, i, 0);
+    }
 }
 
 let demoMode = false;
