@@ -13,9 +13,8 @@ WS.onmessage = function(message) {
             updateActivations(payload.activations);
             break;
         case "game_over":
-            const SQUARES = document.querySelectorAll(".grid > div");
-            SQUARES.forEach(square => {
-                square.classList.add("disabled");
+            grid.forEach(row => {
+                row.forEach(square => square.classList.add("disabled"));
             });
             if (payload.player === "Player1") {
                 document.getElementById("player1-status").textContent = "WINNER";
@@ -27,8 +26,7 @@ WS.onmessage = function(message) {
             }
             if (demoMode) {
                 sleep(200).then(() => {
-                    const SQUARES = document.querySelectorAll(".grid > div");
-                    start(SQUARES);
+                    start();
                 });
             }
             break;
@@ -70,23 +68,22 @@ function updateGrid(state) {
     for (x = 0; x < state.length; x++) {
         for (y = 0; y < state[x].length; y++) {
             if (state[x][y].length > 0) {
-                const SQUARE = document.querySelector('[data-x="' + x + '"][data-y="' + y + '"]');
-                SQUARE.classList.add(state[x][y]);
-                SQUARE.classList.add("disabled");
+                grid[x][y].classList.add(state[x][y]);
+                grid[x][y].classList.add("disabled");
             }
         }
     }
 }
 
-function start(SQUARES) {
+function start() {
     send({
         "command": "start",
         "playerType1": document.getElementById("playerType1").value,
         "playerType2": document.getElementById("playerType2").value,
         "demoMode": demoMode
     });
-    SQUARES.forEach(square => {
-        square.classList.remove("cross", "circle", "disabled");
+    grid.forEach(row => {
+        row.forEach(square => square.classList.remove("cross", "circle", "disabled"));
     });
     document.getElementById("player1-status").innerText = "";
     document.getElementById("player2-status").innerText = "";
@@ -97,30 +94,38 @@ function start(SQUARES) {
 
 let demoMode = false;
 
-onDocumentReady(() => {
+let grid = [[], [], []];
 
-    let body = document.getElementById("game");
-    let networkDef = [9, 32, 32, 32, 32, 9];
-    drawNeuralNetwork(body, "network", "#4dabf7", ...networkDef);
-
-    const SQUARES = document.querySelectorAll(".grid > div");
-
-    SQUARES.forEach(square => {
+function initGrid() {
+    let squares = document.querySelectorAll(".grid > div");
+    squares.forEach(square => {
+        let x = Number(square.dataset.x);
+        let y = Number(square.dataset.y);
+        grid[x][y] = square;
         square.onclick = function() {
-            if (!square.classList.contains("disabled")) {
-                square.classList.add("disabled");
+            if (!this.classList.contains("disabled")) {
+                this.classList.add("disabled");
                 send({
                     "command": "mark",
-                    "x": Number(square.dataset.x),
-                    "y": Number(square.dataset.y)
+                    "x": x,
+                    "y": y
                 });
             }
         }
     });
+}
+
+onDocumentReady(() => {
+
+    let game = document.getElementById("game");
+    let networkDef = [9, 32, 32, 32, 32, 9];
+    drawNeuralNetwork(game, "network", "#4dabf7", ...networkDef);
+
+    initGrid();
 
     const startButton = document.getElementById("start");
     startButton.onclick = function() {
-        start(SQUARES);
+        start();
     }
 
     const demoButton = document.getElementById("demo");
@@ -129,7 +134,7 @@ onDocumentReady(() => {
         if (demoMode) {
             document.getElementById("playerType1").value = "DUMB_BOT";
             document.getElementById("playerType2").value = "NEURAL_NETWORK";
-            start(SQUARES);
+            start();
         }
     }
 
