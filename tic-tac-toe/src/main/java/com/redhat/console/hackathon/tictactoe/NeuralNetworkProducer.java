@@ -19,7 +19,7 @@ public class NeuralNetworkProducer {
         } else {
             Log.info("Creating a new neural network...");
             NeuralNetwork network = new NeuralNetwork();
-            network.init(9, 32, 32, 32, 9);
+            network.init(9, 32, 32, 32, 32, 9);
             return network;
         }
     }

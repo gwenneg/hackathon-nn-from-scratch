@@ -1,8 +1,8 @@
 function drawNeuralNetwork(parentElement, elementId, color, ...networkDef) {
 
-    const LAYER_SPACING = 200;
-    const NEURON_RADIUS = 15;
-    const NEURON_STROKE_WIDTH = 4;
+    const LAYER_SPACING = 125;
+    const NEURON_RADIUS = 8;
+    const NEURON_STROKE_WIDTH = 2.5;
     const NEURON_SPACING = 1;
     const SYNAPSE_STROKE_WIDTH = 0.2;
 
